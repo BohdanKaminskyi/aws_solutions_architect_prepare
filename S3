@@ -74,3 +74,4 @@ What is S3 Transfer Acceleration:
     It uses Amazon CloudFront globally distributed edge locations. As the data arrives at an edge location, 
     data is routed to Amazon S3 over an optimized network path.
     So basically, user uploads files NOT to bucket, but to edge location, and after that across Amazon backbone network to S3 bucket
+
