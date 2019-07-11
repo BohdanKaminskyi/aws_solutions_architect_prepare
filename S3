@@ -1,0 +1,46 @@
+S3 - simple storage service
+    - It's object storage. (flat files)
+    - files size 0...5Tb
+    - unlimited storage
+    - files are stored in buckets (bucket is basically a folder)
+    - S3 is universal namespace (names must be unique globally)
+
+    Objects (files) in S3 consist of following:
+        - key (the name of the object)
+        - value (actually data)
+        - version ID (important for versioning)
+        - metadata
+        - subresources
+            > access control list
+            > torrent
+        - amazon guarantees 99.9... (durability of information 11 x 9s)
+
+How does data consistency work for s3?
+    1. Read after Write consistency for PUTS of new Objects
+        - you upload file to s3, you can read it immidiately (just after it is written on s3)
+    2. Eventual Consistency for overwrite PUTS and DELETES (can take some time to propagate)
+        - if you update an existing file or delete a file and read it immidiately, you may get an older version
+          or you may not. Changes to objects may take a little bit of time to propagate
+
+S3 has
+    - tiered storage
+    - lifecycle management (moving object between different tiers)
+    - versioning 
+    - encription of objects
+    - MFA for deleting objects
+    - you can secure your data using Access Control Lists and Bucket policies
+
+
+S3 Storage classes
+    - S3 Standart 
+            >>> stored redundant across multiple devices in multiple facilities,
+            >>> designed to sustain the loss of 2 facilities concurrently)
+    - S3 - IA (Infrequently Accessed)
+            >>> for data that is accessed less frequently, but requires rapid access when needed
+            >>> lower fee than S3, but you are charged a retrieval fee
+    - S3 One Zone - IA
+            >>> low cost option for infrequently accessed data
+            >>> you do not worry about multiple AZ data resilience
+    - S3 Intelligent Tiering
+            >>> Designed to optimize costs by automatically moving data to the mist cost-efficient access tier,
+                without performance impact or operational overhead 
