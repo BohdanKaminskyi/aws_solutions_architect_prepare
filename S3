@@ -112,3 +112,13 @@ Size of a bucket is a sum of all files + all files versions!!! (if versioning is
     - when you delete file, aws just places delete marker on a file
     - deleting delete marker restores file
     - you can delete a version of a file - then you can't 'go back and restore'
+
+
+Lifecycle management and Glacier
+    - you can add transitions to current versions or previous versions or both...
+    - you can add transitions (e.g. On object creation--transition to Standart-IA after 30 days)
+    - you can manage expiration of objects:
+        > of current or prev. versions
+        > expire current version of object after X days
+        > permanently delete previous versions after X days
+        > there is an option to delete incomplete multipart uploads after X days
