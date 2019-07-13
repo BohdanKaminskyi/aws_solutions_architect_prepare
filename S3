@@ -124,3 +124,13 @@ Lifecycle management and Glacier
         > expire current version of object after X days
         > permanently delete previous versions after X days
         > there is an option to delete incomplete multipart uploads after X days
+
+
+Cross Region Replication
+    - Cross-region replication requires bucket versioning. Enable versioning on this bucket
+    - you can replicate entire bucket or prefix/tags
+    - destination bucket automatically has same permissions as a source one
+    - when we setup cross-origin-replication, it does not automatically copy objects from source bucket,
+      but when we are uploading objects to source bucket after, they will be replicated
+    - delete markers are not replicated
+    - when you delete specific version, it is not replicated
