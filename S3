@@ -141,3 +141,26 @@ S3 Transfer Acceleration
       Instead of uploading directly to your bucket, you can use distinct URL to upload to an Edge location,
       which will then transfer objects to s3 bucket
     - uses amazon bacbone network
+
+
+Terminology:
+    > Edge location - location where the content will be cached. 
+        - Edge locations are NOT just read-only. you can write to them too
+        - objects are cached for a TTL
+        - you can clear cached objects, but you will be charged for that
+    > Origin - origin of all the files that the CDN will distribute (S3 bucket, EC2 instance, Elastic load balancer, Route53)
+    > Distribution - name given to CDN, which consists of a collection of Edge Locations
+
+
+CloudFront
+    - it's CDN (content delivery network) - system of distributed servers that delivers webpages
+      and other web content to a user based on the geo location of the user, the origin of webpage,
+      and a content delivery server
+    - without cdn - to get website content (which is located in London), 
+      any user across the globe needs to send request to that server only... it is slow
+    - types:
+        > Web distribution - typically used for websites
+        > RTMP - Used for Media Streaming
+    - cloudfront is a global service
+    - you can restrict viewer access(exam question, maybe you are netflix and wanna show some content to only premium users)
+    - creating/suspending distribution takes some time (minutes to hours)
