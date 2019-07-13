@@ -115,6 +115,8 @@ Size of a bucket is a sum of all files + all files versions!!! (if versioning is
 
 
 Lifecycle management and Glacier
+    - it automates moving your objects between different storage tiers
+    - can be used in conjunction with versioning 
     - you can add transitions to current versions or previous versions or both...
     - you can add transitions (e.g. On object creation--transition to Standart-IA after 30 days)
     - you can manage expiration of objects:
