@@ -75,3 +75,24 @@ What is S3 Transfer Acceleration:
     data is routed to Amazon S3 over an optimized network path.
     So basically, user uploads files NOT to bucket, but to edge location, and after that across Amazon backbone network to S3 bucket
 
+
+
+S3 Security and Encryption
+- by default, all new buckets are private
+- you can set up access to your buckets using:
+    > Bucket policies
+    > Access Control Lists
+- you can configure logging access requests, and even redirect them to another bucket
+
+Encryption In Transit is archived by
+    - SSL/TLS
+Encryption At Rest (server-side, on store):
+    - S3 Managed Keys - SSE-S3 (amazon manages keys for us)
+    - AWS Key Management Service, Managed Keys - SSE-KMS (you and aws manage keys together)
+    - Server Side Encryption With Customer Provided Keys - SSE-C (amazon gives you a key, but you manage by yourself)
+Client side Encryption
+    - you encrypt and then load
+
+Encryption options:
+    - AES2-256
+    - AWS-KMS
