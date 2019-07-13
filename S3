@@ -134,3 +134,10 @@ Cross Region Replication
       but when we are uploading objects to source bucket after, they will be replicated
     - delete markers are not replicated
     - when you delete specific version, it is not replicated
+
+
+S3 Transfer Acceleration
+    - utilises the CloudFront Edge Network to accelerate your uploads to S3.
+      Instead of uploading directly to your bucket, you can use distinct URL to upload to an Edge location,
+      which will then transfer objects to s3 bucket
+    - uses amazon bacbone network
