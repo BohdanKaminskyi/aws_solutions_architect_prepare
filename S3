@@ -177,3 +177,17 @@ Snowball (big-big disk)
     - on data transfer verification and completion, AWS performs software erasure of the Snowball appliance
     - Snowball Edge is 100TB device (compute + storage)
     - snowmobile (track with data + compute:))) )
+
+
+Storage Gateway
+    - it's a service that connects on-premises software appliance with cloud-based storage to provide seamless and secure 
+      integration between organization's on-premises IT environment and AWS's storage infrastructure
+    - service enables you to securely store data to the AWS cloud for scalable and cost-effective storage
+    That means: you have a data centre, and storage gateway is virtual or physical device that can replicate your data into AWS
+    - software appliance can be downloaded as a VM image that you install on a host in your datacenter (supports Hyper-v/ESXi)
+    - types:
+        > File Gateway (NFS) -- for storing files in S3
+        > Volume Gateway (iSCSI) -- for storing copies of your hard drive/virtual hard drives
+            . Stored volumes
+            . cached volumes
+        > Tape Gateway (VTL-Virtual Tape Library)
