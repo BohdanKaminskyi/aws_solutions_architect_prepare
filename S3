@@ -191,3 +191,30 @@ Storage Gateway
             . Stored volumes
             . cached volumes
         > Tape Gateway (VTL-Virtual Tape Library)
+
+File Gateway
+    - files are stored as objects in your s3 bucket
+    - accessed via Network File System (NFS) mount point
+    - ownership, permissions, and timestamps are stored in s3 in user-metadata of object
+    - once objects are transferred to s3, can be managed as native s3 objects
+
+Volume Gateway
+    - volume interface presents your application with disk volumes using the iSCSI block protocol
+    - data written to that volumes can be asynchronously backed up as point-in-time snapshots
+      of your volumes and stored in cloud as Amazon EBS snapshots
+    - snapshots are incremental backups that capture only changed blocks. All snapshot storage is also
+      compressed to minimize your storage charges
+    - Stored volumes
+        > let you store your primary data locally, while asynchronously backing up data to AWS
+        > Data written to them is stored in your on-premises storage hardware
+        > this data is asynchronously backed up to S3 in form of EBS
+        > Size: 1GB to 16TB
+    - Cached volumes
+        > let you use S3 as your primary data storage while retaining frequently accessed data locally in your storage gateway
+        > minimize the need to scale your on-premises storage infrastructure
+        > Size: 1GB to 32TB
+
+Tape Gateway
+    - used for archiving data in AWS Cloud
+    - lets you leverage your existing tape-based backup application infrastructure to store data on virtual tape cartridges 
+      that you create on your tape gateway
