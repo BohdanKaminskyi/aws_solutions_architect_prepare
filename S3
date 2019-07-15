@@ -164,3 +164,16 @@ CloudFront
     - cloudfront is a global service
     - you can restrict viewer access(exam question, maybe you are netflix and wanna show some content to only premium users)
     - creating/suspending distribution takes some time (minutes to hours)
+
+
+Snowball (big-big disk)
+    - it's a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data into
+      and out of AWS. It adresses such problems as high network costs, long transfer times and security concerns
+    - two flavors:
+        > 50TB
+        > 80TB
+    - uses multiple layers of security designed to protect your data including tamper-resistant enclosures,
+      256-bit encryption and Trusted Platform Module (TPM)
+    - on data transfer verification and completion, AWS performs software erasure of the Snowball appliance
+    - Snowball Edge is 100TB device (compute + storage)
+    - snowmobile (track with data + compute:))) )
