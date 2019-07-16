@@ -1,0 +1,16 @@
+EC2 - Elastic Compute Cloud
+    - web service, that provides resizable compute capacity in the cloud
+    - reduces time required to obtain and boot new server instances to minutes
+    - allows you to quickly scale capacity
+    - pricing models:
+        > On Demand
+            . allows you to pay a fixed rate by the hour (or by the second) with no commitment
+        > Reserved
+            . capacity reservation, offers significant discount on the hourly charge for an instance
+            . contract terms are 1 year/3 years
+        > Spot
+            . enables you to bid whatever price you want for instance capacity
+            . for cases when your applications have flexible start and end times
+        > Dedicated Hosts
+            . physical EC2 server dedicated for your use
+            . can help reduce costs by allowing you to use your existing server-bound software licenses
