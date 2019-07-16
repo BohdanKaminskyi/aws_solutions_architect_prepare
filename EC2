@@ -14,3 +14,36 @@ EC2 - Elastic Compute Cloud
         > Dedicated Hosts
             . physical EC2 server dedicated for your use
             . can help reduce costs by allowing you to use your existing server-bound software licenses
+
+EC2 Pricing models:
+===
+On Demand
+    - for users that want the low cost and flexibility of Amazon EC2 without any up-front payment
+      or long-term commitment
+    - applications with short term, spiky, or unpredictable workloads that cannot be interrupted
+    - applications being developed or tested on Amazon EC2 for the first time
+
+Reserved:
+    - applications with steady state or predictable usage
+    - applications that require reserved capacity
+    - users able to make upfront payments to reduce their total computing costs even further
+    types:
+        > standart reserved instances
+            - up to 75% off on demand instances
+            - the more you pay up front and the longer the contract, the greater the discount
+        > convertible reserved instances
+            - offer up to 54% off on demand capability to change the attributes of the RI as long as the exchange
+              results in the creation of Reserved Instances of equal or greater value
+        > scheduled reserved instances
+            - for specific time windows
+    
+Spot pricing
+    - have flexible start and end time
+    - for applications that are only feasible at very low compute prices
+    - for users with urgent computing needs for large amounts of additional capacity
+
+Dedicated hosts pricing:
+    - for regulatory requirements / that may not support multi-tenant virtualization
+    - for licensing which does not support multi-tenancy or cloud deployments
+    - can be purchased On-Demand (hourly.)
+    - can be purchased as a Reservation for up to 70% off the On-Demand price
