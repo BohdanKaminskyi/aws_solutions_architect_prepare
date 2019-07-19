@@ -41,9 +41,26 @@ Spot pricing
     - have flexible start and end time
     - for applications that are only feasible at very low compute prices
     - for users with urgent computing needs for large amounts of additional capacity
+    - if spot instance is terminated by EC2, you will not be charged for a partial hour of usage
 
 Dedicated hosts pricing:
     - for regulatory requirements / that may not support multi-tenant virtualization
     - for licensing which does not support multi-tenancy or cloud deployments
     - can be purchased On-Demand (hourly.)
     - can be purchased as a Reservation for up to 70% off the On-Demand price
+
+
+EC2 lab
+- Security group is basically a virtual firewall
+- On EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated
+- EBS root volumes on your default AMI's cannot be encrypted, you can encrypt them with third-party tools (bit locker etc.)
+  or this can be done when creating AMI's in AWS Console or using the API
+Keypairs: 
+    - public key -- can see anybody
+    - private key -- in pair with public key give you access to open EC2 instance via SSH
+
+SSH into instance:
+    1. chmod 400 <your_key> # this gives you read-only access to key
+    2. ssh ec2-user@54.147.64.7 -i <your_key>
+    3. sudo su # to get superuser access # for rare cases...
+
