@@ -64,3 +64,13 @@ SSH into instance:
     2. ssh ec2-user@54.147.64.7 -i <your_key>
     3. sudo su # to get superuser access # for rare cases...
 
+
+Security Groups Basics
+- changes are applied immidiately
+- are stateful (if you add rule to inbound rule, it will also apply that for outbound)
+- there's no way to black-listing individual port/ip (use Network Access Control Lists instead)
+- all inbound traffic is blocked by default (you need to add rules for HTTP/RDS/etc.)
+- all outbound traffic is allowed
+- you can have any number of EC2 instances within a security group
+- by default, only 1 security group is attached to instance, but you can add other 'Actions'->Networking
+- you can specify allow rules, but not deny rules
