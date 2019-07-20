@@ -66,11 +66,49 @@ SSH into instance:
 
 
 Security Groups Basics
-- changes are applied immidiately
-- are stateful (if you add rule to inbound rule, it will also apply that for outbound)
-- there's no way to black-listing individual port/ip (use Network Access Control Lists instead)
-- all inbound traffic is blocked by default (you need to add rules for HTTP/RDS/etc.)
-- all outbound traffic is allowed
-- you can have any number of EC2 instances within a security group
-- by default, only 1 security group is attached to instance, but you can add other 'Actions'->Networking
-- you can specify allow rules, but not deny rules
+    - changes are applied immidiately
+    - are stateful (if you add rule to inbound rule, it will also apply that for outbound)
+    - there's no way to black-listing individual port/ip (use Network Access Control Lists instead)
+    - all inbound traffic is blocked by default (you need to add rules for HTTP/RDS/etc.)
+    - all outbound traffic is allowed
+    - you can have any number of EC2 instances within a security group
+    - by default, only 1 security group is attached to instance, but you can add other 'Actions'->Networking
+    - you can specify allow rules, but not deny rules
+
+
+EBS (Elastic Block Store)
+    - provides persistent block storage volunes for EC2 instances
+    - each EBS volume is automatically replicated within AZ 
+    - comes in 5 flavours:
+        . General Purpose (SSD)
+            > balanced price and performance
+            > named gp2
+            > 1 GiB - 16 TiB
+            > up to 16000 IOPS (Input/Output Operations Per Second)
+        . Provisioned IOPS (SSD)
+            > highest performance SSD volume
+            > designed for mission-critical applications
+            > use-case: databases
+            > named io1
+            > 4 GiB - 16 TiB
+            > up to 64000 IOPS
+        . Throughput Optimized Hard Disk Drive
+            > low cost hdd volume
+            > for frequently-accessed, throughput-intensive workloads
+            > for Big Data and Data Warehouses
+            > named st1
+            > 500 GiB - 16 TiB
+            > 500 IOPS
+        . Cold HDD
+            > low cost hdd volume
+            > for less frequently accessed workloads
+            > for File Servers
+            > named sc1
+            > 500 GiB - 16 TiB
+            > 250 IOPS
+        . Magnetic (HDD)
+            > previous gen HDD
+            > workloads where data is infrequently accessed
+            > named Standart
+            > 1 GiB - 1 TiB
+            > 40-200 IOPS
