@@ -131,3 +131,27 @@ EBS Volumes & Snapshots
     - snapshots are incremental -- only the blocks that have changed since your last snapshot are moved to S3
     - to create a snapshot for an Amazon EBS volume that serves as a root device, you should stop the instance before taking the snapshot
     - you can create AMI's from both Volumes and Snapshots
+
+
+AMI Types (EBS vs Instance Store)
+    AMI can be selected based on:
+        - region
+        - OS
+        - Architecture (32-bit vs 64-bit)
+        - Launch permissions
+        - Storage for the Root device (Root device volume)
+            . Instance Store (EPHEMERAL STORAGE)
+                - cannot be stopped (if underlying host fails, you will loose your data)
+                - can be rebooted without loosing data
+            . EBS Backed Volumes
+                - can be stopped. you will not loose data if the instance is stopped
+                - can be rebooted without loosing data
+    By default both ROOT volumes are deleted on instance termination. However with EBS volumes you can tell AWS
+    to keep the root device volume
+
+
+For EBS volumes: the root device for an instance launched from the AMI is an Amazon EBS volume created from
+Amazon EBS snapshot
+
+For Instance Store volumes: the root device for an instance launched from the AMI is an instance store volume created 
+from a template stored in Amazon S3
