@@ -53,7 +53,8 @@ Dedicated hosts pricing:
 EC2 lab
 - Security group is basically a virtual firewall
 - On EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated
-- EBS root volumes on your default AMI's cannot be encrypted, you can encrypt them with third-party tools (bit locker etc.)
+- EBS root volumes on your default AMI's(Amazon Machine Images) cannot be encrypted,
+  you can encrypt them with third-party tools (bit locker etc.)
   or this can be done when creating AMI's in AWS Console or using the API
 Keypairs: 
     - public key -- can see anybody
@@ -112,3 +113,21 @@ EBS (Elastic Block Store)
             > named Standart
             > 1 GiB - 1 TiB
             > 40-200 IOPS
+
+
+EBS Volumes & Snapshots
+    - volume will be placed in same AZ as your instance
+    - when you terminate an instance, root device volume is terminated, but other volumes persist
+    - if you are changing not-root volume size, you'll need to repartition your OS in order to see a change
+    - you do not need to change image 
+    - Exam question: how to move instance/volume to another AZ: 
+        1. create a snapshot 
+        2. create image from snapshot (it will then be displayed in AMI section)
+        3. then create instance from image, in 'Subnet' you can use subnet in another AZ
+        # you can reassign Elastic IP address
+    - you can also copy AMI and change 'Destination region' (to move across regions)
+    - snapshots exist on S3
+    - snapshots are point in time copies of Volumes
+    - snapshots are incremental -- only the blocks that have changed since your last snapshot are moved to S3
+    - to create a snapshot for an Amazon EBS volume that serves as a root device, you should stop the instance before taking the snapshot
+    - you can create AMI's from both Volumes and Snapshots
