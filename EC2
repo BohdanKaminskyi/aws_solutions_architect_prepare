@@ -41,9 +41,117 @@ Spot pricing
     - have flexible start and end time
     - for applications that are only feasible at very low compute prices
     - for users with urgent computing needs for large amounts of additional capacity
+    - if spot instance is terminated by EC2, you will not be charged for a partial hour of usage
 
 Dedicated hosts pricing:
     - for regulatory requirements / that may not support multi-tenant virtualization
     - for licensing which does not support multi-tenancy or cloud deployments
     - can be purchased On-Demand (hourly.)
     - can be purchased as a Reservation for up to 70% off the On-Demand price
+
+
+EC2 lab
+- Security group is basically a virtual firewall
+- On EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated
+- EBS root volumes on your default AMI's(Amazon Machine Images) cannot be encrypted,
+  you can encrypt them with third-party tools (bit locker etc.)
+  or this can be done when creating AMI's in AWS Console or using the API
+Keypairs: 
+    - public key -- can see anybody
+    - private key -- in pair with public key give you access to open EC2 instance via SSH
+
+SSH into instance:
+    1. chmod 400 <your_key> # this gives you read-only access to key
+    2. ssh ec2-user@54.147.64.7 -i <your_key>
+    3. sudo su # to get superuser access # for rare cases...
+
+
+Security Groups Basics
+    - changes are applied immidiately
+    - are stateful (if you add rule to inbound rule, it will also apply that for outbound)
+    - there's no way to black-listing individual port/ip (use Network Access Control Lists instead)
+    - all inbound traffic is blocked by default (you need to add rules for HTTP/RDS/etc.)
+    - all outbound traffic is allowed
+    - you can have any number of EC2 instances within a security group
+    - by default, only 1 security group is attached to instance, but you can add other 'Actions'->Networking
+    - you can specify allow rules, but not deny rules
+
+
+EBS (Elastic Block Store)
+    - provides persistent block storage volunes for EC2 instances
+    - each EBS volume is automatically replicated within AZ 
+    - comes in 5 flavours:
+        . General Purpose (SSD)
+            > balanced price and performance
+            > named gp2
+            > 1 GiB - 16 TiB
+            > up to 16000 IOPS (Input/Output Operations Per Second)
+        . Provisioned IOPS (SSD)
+            > highest performance SSD volume
+            > designed for mission-critical applications
+            > use-case: databases
+            > named io1
+            > 4 GiB - 16 TiB
+            > up to 64000 IOPS
+        . Throughput Optimized Hard Disk Drive
+            > low cost hdd volume
+            > for frequently-accessed, throughput-intensive workloads
+            > for Big Data and Data Warehouses
+            > named st1
+            > 500 GiB - 16 TiB
+            > 500 IOPS
+        . Cold HDD
+            > low cost hdd volume
+            > for less frequently accessed workloads
+            > for File Servers
+            > named sc1
+            > 500 GiB - 16 TiB
+            > 250 IOPS
+        . Magnetic (HDD)
+            > previous gen HDD
+            > workloads where data is infrequently accessed
+            > named Standart
+            > 1 GiB - 1 TiB
+            > 40-200 IOPS
+
+
+EBS Volumes & Snapshots
+    - volume will be placed in same AZ as your instance
+    - when you terminate an instance, root device volume is terminated, but other volumes persist
+    - if you are changing not-root volume size, you'll need to repartition your OS in order to see a change
+    - you do not need to change image 
+    - Exam question: how to move instance/volume to another AZ: 
+        1. create a snapshot 
+        2. create image from snapshot (it will then be displayed in AMI section)
+        3. then create instance from image, in 'Subnet' you can use subnet in another AZ
+        # you can reassign Elastic IP address
+    - you can also copy AMI and change 'Destination region' (to move across regions)
+    - snapshots exist on S3
+    - snapshots are point in time copies of Volumes
+    - snapshots are incremental -- only the blocks that have changed since your last snapshot are moved to S3
+    - to create a snapshot for an Amazon EBS volume that serves as a root device, you should stop the instance before taking the snapshot
+    - you can create AMI's from both Volumes and Snapshots
+
+
+AMI Types (EBS vs Instance Store)
+    AMI can be selected based on:
+        - region
+        - OS
+        - Architecture (32-bit vs 64-bit)
+        - Launch permissions
+        - Storage for the Root device (Root device volume)
+            . Instance Store (EPHEMERAL STORAGE)
+                - cannot be stopped (if underlying host fails, you will loose your data)
+                - can be rebooted without loosing data
+            . EBS Backed Volumes
+                - can be stopped. you will not loose data if the instance is stopped
+                - can be rebooted without loosing data
+    By default both ROOT volumes are deleted on instance termination. However with EBS volumes you can tell AWS
+    to keep the root device volume
+
+
+For EBS volumes: the root device for an instance launched from the AMI is an Amazon EBS volume created from
+Amazon EBS snapshot
+
+For Instance Store volumes: the root device for an instance launched from the AMI is an instance store volume created 
+from a template stored in Amazon S3
