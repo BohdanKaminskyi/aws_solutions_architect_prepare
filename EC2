@@ -187,3 +187,35 @@ CloudTrail
     - increases visibility into your user and resource activity by recording AWS Management Console actions and API calls
     - you can identify which users and accounts called AWS, the source IP address from which the calls were made,
       and when the calls occured
+
+
+AWS Command Line (CLI)
+    - aws s3 mb s3://<name> # make bucket
+
+
+IAM Roles
+    - tap on instance 'Attach role' 
+    - !!! do not store secret access key/keyID on EC2 instances
+    - roles are universal
+    - can be added to EC2 instance on runtime
+
+
+Using Boot Strap scripts 
+    - can automate EC2 deployments
+    - when creating the instance 'Advanced details' you can for example:
+        #!/bin/bash
+        yum update -y
+        yum install httpd -y
+        service httpd start
+        chkconfig httpd on
+        cd /var/www/html
+        echo "<html>//...dwadawfjawjw" > index.html
+        aws s3 mb s3://somdwajdakldjsl
+        aws s3 cp index.html s3://somdwajdakldjsl
+    
+        // this will create a website after instance is up and running
+
+
+EC2 instance Metadata/UserData
+    - curl http://169.254.169.254/latest/meta-data/
+    - curl http://169.254.169.254/latest/user-data/ # boot strap script you passed
