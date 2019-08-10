@@ -155,3 +155,35 @@ Amazon EBS snapshot
 
 For Instance Store volumes: the root device for an instance launched from the AMI is an instance store volume created 
 from a template stored in Amazon S3
+
+
+CloudWatch 101
+    - monitoring service to monitor your AWS resources, as well as the applications that you run on AWS
+    - basically monitors performance
+    - can monitor:
+        . Compute
+            - EC2 instances
+            - Autoscaling
+            - Elastic Load Balancers
+            - Route53 Health Checks
+        . Storage & Content Delivery
+            - EBS Volumes
+            - Storage Gateways
+            - CloudFront
+        . Host Level metrics
+            - CPU
+            - Network
+            - Disk
+            - Status Check
+    - CloudWatch with EC2 will monitor events every 5 minutes by default
+    - you can have 1 minute intervals by turning on detailed monitoring
+    - you can create CloudWatch alarms which trigger notifications
+    - you need to 'Enable detailed CloudWatch monitoring'
+    - you can create dashboards, alarms , events, logs
+
+!Exam questions on CloudWatch vs CloudTrail
+
+CloudTrail
+    - increases visibility into your user and resource activity by recording AWS Management Console actions and API calls
+    - you can identify which users and accounts called AWS, the source IP address from which the calls were made,
+      and when the calls occured
