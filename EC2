@@ -155,3 +155,11 @@ Amazon EBS snapshot
 
 For Instance Store volumes: the root device for an instance launched from the AMI is an instance store volume created 
 from a template stored in Amazon S3
+
+
+Encrypted Root Device Volumes & Snapshots
+1. Launch instance (now can be encrypted on creation)
+2. Go to instance. 
+3. Create Snapshot
+4. Snapshot -> Copy (check 'Encrypt this snapshot')
+ 
