@@ -1,0 +1,49 @@
+Relational DBs on AWS (OLTP):
+    - Microsoft SQL Server
+    - Oracle
+    - MySQL
+    - PostgeSQL
+    - Amazon Aurora
+    - MariaDB
+
+RDS (Relational DB Service)
+    - Multi-AZ (for disaster recovery)
+        . means, that if primary DB fails, aws starts to point to secondary db
+    - Read Replicas - For Performance
+        - whenever you do write to primary DB, that write is replicated to Read Replica
+        - in case primary db fails, you need to manually repoint your instance to Replica
+        - the point of replicas - if you have rly high READ load, some users will read from 1st db, and some from replica (scaling)
+        - up to 5 copies
+
+
+Non relational DBs:
+    - Collection  == Table
+    - Document    == Row
+    - Key-value pairs == Columns
+    - you can add new key-value pair even for just one record
+    - DynamoDB
+
+
+Data Warehousing (AWS Solution --- Redshift)
+    - used for BI
+    - tools like Cognos, Jaspersoft, SQL Server Reporting Services, Oracle Hyperion, SAP NetWeaver
+    - used to pull in very large and complex datasets
+    - usually used by management to do queries on data (such as current performance vs targets etc.)
+
+
+OLTP vs OLAP
+    - OLTP (Online Transaction Processing)
+    - OLAP (Online Analytics Processing)
+    - differs in terms of the types of queries you will run
+
+    . OLTP example: Order number 2341214 pulls up a row of data such as Name, Date, Address to Deliver to etc.
+    . OLAP example: as a manager, i want to know net profit in some territory for the Digital Radio Product (pulls a lot of records)
+
+
+ElastiCache
+    - web service that makes it easy to deploy, operate, and scale an in-memory cache in the cloud (for example, loading top 10 products page of 1M/sec requests website)
+    - the service improves the performance of web applications by allowing you to retrieve information from fast,
+      managed, in-memory caches instead of relying entirely on slower disk-based DBs
+    - supports two open-source in-memory caching engines:
+        . Redis
+        . Memcached
