@@ -163,3 +163,181 @@ Encrypted Root Device Volumes & Snapshots
 3. Create Snapshot
 4. Snapshot -> Copy (check 'Encrypt this snapshot')
  
+
+CloudWatch 101
+    - monitoring service to monitor your AWS resources, as well as the applications that you run on AWS
+    - basically monitors performance
+    - can monitor:
+        . Compute
+            - EC2 instances
+            - Autoscaling
+            - Elastic Load Balancers
+            - Route53 Health Checks
+        . Storage & Content Delivery
+            - EBS Volumes
+            - Storage Gateways
+            - CloudFront
+        . Host Level metrics
+            - CPU
+            - Network
+            - Disk
+            - Status Check
+    - CloudWatch with EC2 will monitor events every 5 minutes by default
+    - you can have 1 minute intervals by turning on detailed monitoring
+    - you can create CloudWatch alarms which trigger notifications
+    - you need to 'Enable detailed CloudWatch monitoring'
+    - you can create dashboards, alarms , events, logs
+
+!Exam questions on CloudWatch vs CloudTrail
+
+CloudTrail
+    - increases visibility into your user and resource activity by recording AWS Management Console actions and API calls
+    - you can identify which users and accounts called AWS, the source IP address from which the calls were made,
+      and when the calls occured
+
+
+AWS Command Line (CLI)
+    - aws s3 mb s3://<name> # make bucket
+
+
+IAM Roles
+    - tap on instance 'Attach role' 
+    - !!! do not store secret access key/keyID on EC2 instances
+    - roles are universal
+    - can be added to EC2 instance on runtime
+
+
+Using Boot Strap scripts 
+    - can automate EC2 deployments
+    - when creating the instance 'Advanced details' you can for example:
+        #!/bin/bash
+        yum update -y
+        yum install httpd -y
+        service httpd start
+        chkconfig httpd on
+        cd /var/www/html
+        echo "<html>//...dwadawfjawjw" > index.html
+        aws s3 mb s3://somdwajdakldjsl
+        aws s3 cp index.html s3://somdwajdakldjsl
+    
+        // this will create a website after instance is up and running
+
+
+EC2 instance Metadata/UserData
+    - curl http://169.254.169.254/latest/meta-data/
+    - curl http://169.254.169.254/latest/user-data/ # boot strap script you passed
+
+
+EFS (Elastic File System)
+    - file storage service for EC2 instances
+    - allows you to create and configure file systems
+    - with EFS, storage capacity is elastic
+    - two EC2 instances cannot share EBS volume, but can EFS volume
+    - add: yum install -y amazon-efs-utils
+    - uses NFSv4
+    - you only pay for storage you use
+    - can support thousands of concurrent NFS connections
+    - data is stored across multiple AZ's within a region
+    - Read after write consistency
+
+
+EC2 Placement Groups
+    - 3 types
+        . Clustered Placement Group
+            - grouping of instances within a single AZ
+            - recommended for applications that need low network latency, high network throughput
+            - only certain types of instances can be launched in to a Clustered Placement Group
+        . Spread Placement Group
+            - each instance is placed on distinct underlying hardware
+            - recommended for apps that have a small number of critical instances that should be kept 
+              separate from each other
+            - think of it like 'individual instances'
+        . Partitioned Placement Group
+            - EC2 divides each group into logical segments called partitions
+            - EC2 ensures that each partition within a placement group has it's own set of racks
+            - each rack has it's own network and power source
+            - no two partitions within a placement group share the same racks, allowing you to isolate
+              the impact of hardware failure within you application
+            - think of it like 'multiple instances'
+            - for use with multiple EC2 instances HDFS, HBase, and Cassandra clusters
+
+
+Q&A
+
+Q: When creating a new security group, all inbound traffic is allowed by default.
+A: False (For an 'new' security group nothing is allowed in by default. )
+
+Q: Can a placement group be deployed across multiple Availability Zones?
+A: No (Spread or Partition placement groups)
+
+Q: To help you manage your Amazon EC2 instances, you can assign your own metadata in the form of ____
+A: Tags (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
+
+Q: In order to enable encryption at rest using EC2 and Elastic Block Store, you must ________
+A: Configure encryption when creating the EBS volume (Using AWS managed keys to provide EBS encryption at rest is a relatively painless and reliable way to protect assets and demonstrate
+    your professionalism in any commercial situation.)
+
+Q: Can I move a reserved instance from one region to another?
+A: No (Depending on you type of RL you can You can modify the; AZ, scope, network platform, or instance size (within the same instance type). 
+   But not Region. In some circumstances you can sell RIs, but only if you have a US bank account.)
+
+Q: You need to know both the private IP address and public IP address of your EC2 instance. You should ________.
+A: Retrieve the instance Metadata from http://169.254.169.254/latest/meta-data/
+
+Q: Amazon's EBS volumes are ________.
+A: Block based storage (EBS, EFS, and FSx are all storage services base on Block storage)
+
+Q: If an Amazon EBS volume is an additional partition (not the root volume), can I detach it without stopping the instance?
+A: Yes, although it may take some time.
+
+Q: You can add multiple volumes to an EC2 instance and then create your own RAID 5/RAID 10/RAID 0 configurations using those volumes.
+A: True
+
+Q: Individual instances are provisioned ________.
+A: Availability Zones
+
+Q: Placement Groups can be created across 2 or more Availability Zones.
+A: True
+
+Q: Is it possible to perform actions on an existing Amazon EBS Snapshot?
+A: Yes, through AWS APIs, CLI, and AWS Console
+
+Q: You have developed a new web application in the US-West-2 Region that requires six Amazon Elastic Compute Cloud (EC2) instances to be running at all times.
+   US-West-2 comprises three Availability Zones (us-west-2a, us-west-2b, and us-west-2c). 
+   You need 100 percent fault tolerance: should any single Availability Zone in us-west-2 become unavailable, the application must continue to run. 
+   How would you make sure 6 servers are ALWAYS available? NOTE: each answer has 2 possible deployment configurations. 
+   Select the answer that gives TWO satisfactory solutions to this scenario.
+A: Solution 1: us-west-2a with six EC2 instances, us-west-2b with six EC2 instances, and us-west-2c with no EC2 instances. 
+   Solution 2: us-west-2a with three EC2 instances, us-west-2b with three EC2 instances, and us-west-2c with three EC2 instances.
+
+Q: The use of a cluster placement group is ideal _______
+A: Your fleet of EC2 instances requires high network throughput and low latency within a single availability zone.
+
+Q: EBS Snapshots are backed up to S3 in what manner?
+A: Incrementally
+
+Q: Can I delete a snapshot of an EBS Volume that is used as the root device of a registered AMI?
+A: No
+
+Q: Which AWS CLI command should I use to create a snapshot of an EBS volume?
+A: aws ec2 create-snapshot
+
+Q: I can change the permissions to a role, even if that role is already assigned to an existing EC2 instance, and these changes will take effect immediately.
+A: True
+
+Q: To retrieve instance metadata or user data you will need to use the following IP Address:
+A: http://169.254.169.254
+
+Q: Will an Amazon EBS root volume persist independently from the life of the terminated EC2 instance to which it was previously attached? 
+   In other words, if I terminated an EC2 instance, would that EBS root volume persist?
+A: You can control whether an EBS root volume is deleted when its associated instance is terminated. 
+   The default delete-on-termination behaviour depends on whether the volume is a root volume, or an additional volume. 
+   By default, the DeleteOnTermination attribute for root volumes is set to 'true.' 
+   However, this attribute may be changed at launch by using either the AWS Console or the command line. 
+   For an instance that is already running, the DeleteOnTermination attribute must be changed using the CLI.
+
+Q: I can use the AWS Console to add a role to an EC2 instance after that instance has been created and powered-up.
+A: True
+
+Q: Can you attach an EBS volume to more than one EC2 instance at the same time?
+A: No
