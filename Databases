@@ -77,3 +77,17 @@ Creating RDS instance (lab)
                 . db host == db endpoint
     
     
+RDS Backups:
+    - Automated Backups
+        . you can recover your DB to any point in time within retention period (1 to 35 days)
+        . automated backups will take a full daily snapshot and will also store transaction logs througout the day
+        . when you do a recovery, AWS will first choose the most recent daily back up, and then apply transaction logs relevant to that day
+        . allows you to do a point in time recovery down to a second
+        . enabled by default
+        . backup data is stored in s3 and you get free storage equal to db size
+    - Database Snapshots
+        . user-initiated
+        . stored even after you delete the original RDS instance, unlike automated backups
+
+    !!! if you do a restore from backup procedure - you will have new DNS endpoint
+
