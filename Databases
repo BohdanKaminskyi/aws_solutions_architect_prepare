@@ -97,5 +97,21 @@ Encryption At Rest
     - once your RDS instance is encrypted, data stored at rest/automated backups/read replicas and snapshots are encrypted
 
 
+Multi-AZ
+    - supported for SQL Server, Oracle, MySQL, PostgeSQL, MariaDB
+    - allows you to have the exact copy of your db in another AZ
+    - aws handles replication for you, when your db is written to, this write will be automatically synchronized to the stand by db
 
 
+Read Replicas
+    - allow you to have a read-only copy of your production database
+    - this is achived by using Asynchronous replication from the primary RDS instance to the read replica
+    - you use read replicas primarily for very read-heavy database workloads
+    - used for scaling not for disaster recovery
+    - automatic backups should be turned on in order to use read replicas
+    - up to 5 read replica copies for any db
+    - you can have read replicas of read replicas (watch out for latency)
+    - you can have a read replica in a second region
+    - each read replica has its own DNS end point
+    - you can have replicas with Multi-AZ
+    - can be promoted to a standalone db (will be no replica anymore though)
