@@ -91,3 +91,11 @@ RDS Backups:
 
     !!! if you do a restore from backup procedure - you will have new DNS endpoint
 
+Encryption At Rest
+    - supported for MySQL, Oracle, SQL Server, PostgreSQL, MariaDB & Aurora
+    - encryption is done using the AWS Key Management Service (KMS) service
+    - once your RDS instance is encrypted, data stored at rest/automated backups/read replicas and snapshots are encrypted
+
+
+
+
