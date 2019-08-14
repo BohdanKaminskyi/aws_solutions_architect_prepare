@@ -115,3 +115,20 @@ Read Replicas
     - each read replica has its own DNS end point
     - you can have replicas with Multi-AZ
     - can be promoted to a standalone db (will be no replica anymore though)
+
+
+DynamoDB
+    - NoSQL DB Solution
+    - for all apps that need consistent, single-digit millisecond latency at any scale
+    - supports document and key-value data models
+    - stored on SSD storage
+    - spread across 3 geographically distinct data centres
+    - 2 read models:
+        . Eventual Consistent Reads
+            - consistency across all copies of data is usually reached within a second
+            - repeating a read after a short time should return the updated data (Best Read Performance)
+            > so if you do not need to read after you write within 1 sec -> it's your option
+            > When you read data from a DynamoDB table, the response might not reflect the results of a recently completed write operation
+        . Strongly Consistent Reads
+            - eturns a response with the most up-to-date data, reflecting the updates from all prior write operations that were successful
+
