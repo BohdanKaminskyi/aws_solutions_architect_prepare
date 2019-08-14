@@ -132,3 +132,25 @@ DynamoDB
         . Strongly Consistent Reads
             - eturns a response with the most up-to-date data, reflecting the updates from all prior write operations that were successful
 
+
+Redshift
+    - peta-byte scale data warehouse service in the cloud
+    - starts with $0.25 per hour with no commitments
+    - can be configured as follows:
+        . Single Node (160 Gb)
+        . Multi-Node
+            - Leader-Node (manages client connections and receives queries)
+            - Compute Node (store data and perform queries and computations). Up to 128 Compute Nodes
+    - Massively Parallel Processing (MPP)
+        . Redshift automatically distributes data and query load across all nodes
+    - backups
+        . enabled by default with 1 day retention period (max 35 days)
+        . attempts to always maintain at least 3 copies of your data  (the original, replica and backup in Amazon S3)
+    - encrypted at transit using SSL
+    - encrypted at rest using AES-256
+    - takes care of keys management
+    - only in 1 AZ (cannot be Multi-AZ)
+
+
+
+
