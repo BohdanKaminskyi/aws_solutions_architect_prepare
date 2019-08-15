@@ -1,0 +1,55 @@
+Route53
+    - DNS Service
+    - why named Route53 - DNS is on port 53
+    - DNS is used to convert human-readable domain names into IP adresses
+    - we created ipv6 because of running out of ipv4 adresses
+    - top level domain - last word (.com, .edu)
+    - top level domain names are controlled by Internet Assigned Numbers Authority in a root zone database
+        (which is essentially a database of all available top level domains)
+        . https://www.iana.org/domains/root/db - list of all top level domains
+    - domain registrars
+        . registrar is an authority that can assign domain names directly under one or more top-level domains
+            - these domains are registered with InterNIC, a service of ICANN, which enforces uniqueness of domain
+              names across the internet
+            - each domain name becomes registered in a central database known as WhoIS database
+    - each dns domain starts with SOA
+        . SOA (Start Of Authority) Record
+            - stores information about 
+                . name of the server that supplied the data for the zone
+                . administrator of the zone
+                . current version of data file
+                . default number of seconds for the TTL file on resource records
+        . NS (Name Server) Record
+            - used by top level domain servers to direct traffic to the Content DNS server which contains 
+              the authoritative DNS records
+    - Example: user types hellocloudguru.com
+        1. browser goes to top level domain server (.com) and queries for authority record
+        2. This gives you NS record
+        3. Then you querying NS records
+        4. This gives you SOA
+        5. Here you get DNS records
+     - Types of DNS records:
+        - "A"
+            . Address
+            . Translates the name of the domain into IP Address
+            . it's foundamental
+        - "CNAME"
+            . Can be used to resolve one domain name to another
+            . example: you have m.site.com and you also want mobile.site.com to point to resovse to the same Address
+        - "Alias"
+            . used to map resources record sets in your hosted zone to Elastic Load Balancers, CloudFront distributions, or S3 buckets that are configured as websites
+            . Alias records work like a CNAME record in that you can map one DNS name to another 'target' DNS name
+        - "MX"
+            . for mail
+        - "PTR"
+            . reverse of "A"
+    - TTL (Time to live)
+        . the length that a DNS record is cached on either the Resolving Server or the users own local PC is equal to the value of TTL in seconds
+        . the lower the TTL, the faster changes to DNS records take to propagate throughout the internet
+
+    - Exam tips:
+        . ELBs do not have pre-defined IPv4 addressses; you resolve to them using DNS name
+        . Alias vs CNAME
+            - The ALIAS record maps a name to another name, but can coexist with other records on that name
+            - The CNAME record maps a name to another name. It should only be used when there are no other records on that name.
+            - prefer Alias in exam questions
