@@ -54,6 +54,8 @@ Route53
             - The CNAME record maps a name to another name. It should only be used when there are no other records on that name.
             - prefer Alias in exam questions
 
+In Route53 you specify ip-addresses of your EC2 instances
+
 
 Routing policies:
     - Simple Routing
@@ -63,3 +65,10 @@ Routing policies:
     - Geolocation Routing
     - Geoproximity Routing (Traffic Flow only)
     - Multivalue Answer Routing
+
+
+Simple Routing
+    - only record with multiple IP addresses
+    - if you specify multiple values in a record, Route 53 returns all values to the user
+      in a random order ( you don't know which EC2 instance will be used...)
+    - after TTL, you probably will be on another EC2 instance
