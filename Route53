@@ -72,3 +72,12 @@ Simple Routing
     - if you specify multiple values in a record, Route 53 returns all values to the user
       in a random order ( you don't know which EC2 instance will be used...)
     - after TTL, you probably will be on another EC2 instance
+
+
+Weighted Routing Policy
+    - allows you to split traffic based on different weights assigned
+    - example: you can set 10% of your traffic to us-east-1 and 90% to go to eu-west-1
+    - you can check 'Associate with Health Check'
+        . you can set health checks on individual record sets
+        . if a record set fails a health check it will be removed from Route53 until it passesthe health check
+        . you can set SNS notifications to alert you if a health check is failed
