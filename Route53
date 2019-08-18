@@ -81,3 +81,10 @@ Weighted Routing Policy
         . you can set health checks on individual record sets
         . if a record set fails a health check it will be removed from Route53 until it passesthe health check
         . you can set SNS notifications to alert you if a health check is failed
+
+
+Latency-Based Policy
+    - allows you to route traffic based on the lowest network latency for your end user (ie which region will give them fastest response time)
+    - to use Latency-Based Routing, you create a latency resource record set for the EC2 (or ELB) resource in each region 
+      that hosts your website. When Route53 receives a query for your site, it selects the latency resource record set for the region
+      that gives the user the lowest latency. Route53 responds with the value associated with the resource record set
