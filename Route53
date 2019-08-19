@@ -101,3 +101,16 @@ Geolocation Policy
        configured for your European customers. These servers may have the local language of your European customers and all prices are displayed 
        in Euros
 
+
+Geoproximity Policy (Traffic Flow Only)
+    - lets Route53 route traffic to your resources based on the geographic location of your users and your resources
+    - you can optionally choose to route more traffic or less to a given resource by specifying a value, known as bias.
+       Bias expands or shrinks the size of the geographic region from which traffic is routed to a resource
+    - to use geoproximity routing you must use Route53 traffic flow
+
+
+Multivalue Answer Policy
+    - allows you to configure Route53 to return multiple values, such as IP addresses for your web servers, in response to DNS queries.
+       You can specify multiple values for almost any record, but Multivalue answer routing also lets you check the health of each resource,
+       so Route53 returns only values for healthy resources
+    - similar to Simple Routing however allows you to put health checks on each record set
