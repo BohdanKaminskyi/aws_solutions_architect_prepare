@@ -114,3 +114,34 @@ Multivalue Answer Policy
        You can specify multiple values for almost any record, but Multivalue answer routing also lets you check the health of each resource,
        so Route53 returns only values for healthy resources
     - similar to Simple Routing however allows you to put health checks on each record set
+
+
+Q: Which of the following Route 53 policies allow you to 
+    a) route data to a second resource if the first is unhealthy, and 
+    b) route data to resources that have better performance?
+A: Failover Routing and Latency-based Routing
+
+Q: Route53 is Amazon's DNS Service.
+A: True
+
+Q: Route53 is named so because ________.
+A: DNS port is 53
+
+Q: You have created a new subdomain for your popular website, 
+    and you need this subdomain to point to an Elastic Load Balancer using Route53. Which DNS record set should you create?
+A: CNAME
+
+Q: True or False: There is a limit to the number of domain names that you can manage using Route 53.
+A: True and False. With Route 53, there is a default limit of 50 domain names. However, this limit can be increased by contacting AWS support.
+
+Q: You are hosting a website and would like visitors from United Kingdom to see a different site than those in Australia. 
+    Which Routing Policy would help you to accomplish this?
+A: Geolocation Routing
+
+Q: Your company hosts 10 web servers all serving the same web content in AWS. 
+    They want Route 53 to serve traffic to random web servers. 
+    Which routing policy will meet this requirement, and provide the best resiliency?
+A: Multivalue answer routing lets you configure Amazon Route 53 to return multiple values, such as IP addresses for your web servers, 
+    in response to DNS queries. Route 53 responds to DNS queries with up to eight healthy records and gives different answers to different DNS resolvers.
+    The choice of which to use is left to the requesting service effectively creating a form or randomisation.
+    
