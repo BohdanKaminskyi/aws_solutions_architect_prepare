@@ -88,3 +88,16 @@ Latency-Based Policy
     - to use Latency-Based Routing, you create a latency resource record set for the EC2 (or ELB) resource in each region 
       that hosts your website. When Route53 receives a query for your site, it selects the latency resource record set for the region
       that gives the user the lowest latency. Route53 responds with the value associated with the resource record set
+
+
+Failover Policy
+    - used when you want to create an active/passive set up. For example, you may want your primary site to be in EU-WEST-2
+      and your secondary DR Site in AP-SOUTHEAST-2. Route53 will monitor the health of your primary site using a health check
+
+
+Geolocation Policy
+    - lets you choose where your traffic will be sent based on the geographic location of your users (ie the location from which 
+       DNS queries originate). For example, you might want all queries from Europe to be routed to a fleet of EC2 instances that are specifically 
+       configured for your European customers. These servers may have the local language of your European customers and all prices are displayed 
+       in Euros
+
