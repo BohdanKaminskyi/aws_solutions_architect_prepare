@@ -5,3 +5,26 @@ VPCs 101
        in the virtual network you define
     - you have ocmplete control over your virtual environment including selection of IP ranges,
        creation of subnets and configuration of route tables and network gateways
+
+
+VPC structure:
+    - on the outside of VPC we have 2 gateways - Internet Gateway and Virtual Private Gateway
+    - both of these connections go to a router
+    - router then directs traffic to Route tables
+    - then Route tables will direct traffic through Network ACLs (that's first line of defence), like firewall or security groups
+    - Network ACLs are stateless (when Security Groups are statefull):
+        . allow/deny rules can be added
+        . you can block specific IP adresses
+    - then we move to Security Groups which are statefull (futher line of defence)
+    - and here we have 2 different subnets:
+        . PUBLIC SN 
+            - internet traffic is accessible for any EC2 instances here
+        . PRIVATE SN
+            - EC2 instance cannot connect to the internet on it's own
+            - you can still connect to that EC2 instance, but that's only possible if you first ssh into instance 
+               in public subnet, and from it ssh into private one
+            - there are 3 ranges of IPs reserved for private subnets:
+                . 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+                . 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+                . 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+
