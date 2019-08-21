@@ -1,0 +1,7 @@
+VPCs 101
+    - VPC (Virtual Private Cloud) 
+    - think of it as Virtual Data Centre in the Cloud
+    - let's you provision a logically isolated section of the AWS where you can launch resources
+       in the virtual network you define
+    - you have ocmplete control over your virtual environment including selection of IP ranges,
+       creation of subnets and configuration of route tables and network gateways
