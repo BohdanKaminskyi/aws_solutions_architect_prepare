@@ -28,3 +28,12 @@ VPC structure:
                 . 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
                 . 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
 
+
+What can we do with VPC:
+    - launch instance into a subnet of your choosing
+    - assign custom IP address ranges in each subnet
+    - configure route tables between subnets
+    - create internet gateway and attach it to our VPC
+    - much better security control over your AWS resources
+    - you can assign security groups to individual instances
+    - subnet network access control lists (ACLS)
