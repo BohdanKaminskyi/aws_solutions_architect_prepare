@@ -56,16 +56,42 @@ VPC Peering
 
 
 Build a Custom VPC lab
+    - aws reservs 5 ips for Network Address, VPC router, broadcast etc.
     - when you create a VPC, some things are NOT created:
         . new subnets
         . internet gateways
     - but some ARE created:
-        .route table
+        . route table
         . network ACL 
         . Security group
-    - then you need to create 2 subnets:
-        . we want one of them to be publicly accessible, so:
-            - we need EC2 instance to launch in it with public IP address (Actions -> 'Modify auto-sign IP settings)
-    - next step - add Internet Gateways so we can connect to our VPC
-        . when you create IG it is 'detached' (fix: Actions -> 'attach')
-    - aws reservs 5 ips for Network Address, VPC router, broadcast etc.
+
+    1. create 2 subnets:
+            . we want one of them to be publicly accessible, so:
+                - we need EC2 instance to launch in it with public IP address (Actions -> 'Modify auto-sign IP settings)
+    2. add Internet Gateways so we can connect to our VPC
+            . when you create IG it is 'detached' (fix: Actions -> 'attach')
+            . you cannot attach another IG to same VPC (1 IG per VPC)
+    3. configure Route tables
+            . if you click on 'Routes' there are 2 routes (so that our subnets can talk to each other over ipv4 and ipv6)
+            . we always want to make main route table PRIVATE and have separate route table for public subnet
+                - let's create a route table (public to the internet):
+                    1. simply create
+                    2. 'Edit routes' -> 'Add route'
+                    3. destination: 0.0.0.0/0, target: GW
+                - any subnet associated with this route table will become public
+                    1. 'Subnet associations' -> 'Edit ...'
+                    2. check your 'public' subnet
+    4. create 2 EC2 instances (1 for public subnet, 1 for private):
+            Public:
+                . in 'network' use your VPC
+                . 'subnet' - public subnet
+                . auto-assign ips
+                . create new security group:
+                    - + http 0.0.0.0/0
+            Private:
+                . in 'network' use your VPC
+                . 'subnet' - private subnet
+                . auto-assign ips (Disable)
+                . use existing security group:
+                    - default one
+                . add tag... 
