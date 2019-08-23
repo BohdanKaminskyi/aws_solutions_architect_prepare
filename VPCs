@@ -53,3 +53,19 @@ VPC Peering
     - peering is in a star configuration: ie 1 central VPC peers with 4 others.
         NO TRANSITIVE PEERING!!!
     - you can peer between regions
+
+
+Build a Custom VPC lab
+    - when you create a VPC, some things are NOT created:
+        . new subnets
+        . internet gateways
+    - but some ARE created:
+        .route table
+        . network ACL 
+        . Security group
+    - then you need to create 2 subnets:
+        . we want one of them to be publicly accessible, so:
+            - we need EC2 instance to launch in it with public IP address (Actions -> 'Modify auto-sign IP settings)
+    - next step - add Internet Gateways so we can connect to our VPC
+        . when you create IG it is 'detached' (fix: Actions -> 'attach')
+    - aws reservs 5 ips for Network Address, VPC router, broadcast etc.
