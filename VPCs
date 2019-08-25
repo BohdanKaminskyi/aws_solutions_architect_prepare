@@ -95,3 +95,17 @@ Build a Custom VPC lab
                 . use existing security group:
                     - default one
                 . add tag... 
+    5. In order to connect to a private ec2 instance you need to create another security group:
+        - private instance has not public ip, but has private one.
+        - by default, you cannot ssh from your public ec2 instance into private,
+            because they are both in different security groups
+        1. On new security group
+            - allow ICMP traffic (so we can do ping)
+            - ssh
+            - http
+            - dbs
+        2. Change security group of private instance to newly created
+        3. then you need to store keypair in your public instance and ssh into private one
+            !!!ATTENTION!!! Do not do that this way, as if your public instance got hacked, hacker that can ssh into your private instance
+            - there are other ways of doing it right
+
