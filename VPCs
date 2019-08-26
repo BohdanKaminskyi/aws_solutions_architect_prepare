@@ -109,3 +109,53 @@ Build a Custom VPC lab
             !!!ATTENTION!!! Do not do that this way, as if your public instance got hacked, hacker that can ssh into your private instance
             - there are other ways of doing it right
 
+
+Network Address Translation (NAT)
+    - we want our instances in private subnet to still download software and install updates
+    - we don't wanna make instance to be public
+    - there are NAT instances and NAT Gateways
+    - NAT instance is a single EC2 instance
+    - NAT Gateway - highly available Gateway
+    - In order to create NAT instance:
+        1. EC2
+        2. Community AMIs (in search query type "nat")
+        3. select any (or first one)
+        4. launch it in public subnet
+        5. use webDMZ security group
+        6. 'Actions' -> Change Source/Destination checks (Disable)
+        7. Create a route in root tables for main table
+        8. add rule 0.0.0.0/0 , as a target use NAT_instance
+        - the problem with such architecture - we have 1 small NAT machine, it can be easily overhelmed
+        - it's single point of failure (if you terminate that instance then you cannot download anything on private instances)
+    - To create and use NAT Gateway:
+        1. NAT Gateways section
+        2. Choose public instance
+        3. Go to Route tables, edit main route table
+        4. add rule 0.0.0.0/0 , as a target use nat-gateway
+
+
+Exam tips:
+    - NAT Instances:
+        . when creating a NAT instance, Disable Source/Destination Check on the Instance
+        . NAT instances must be in a public subnet
+        . there must be a route out of the private subnet to the NAT instance, in order for this to work
+        . the amount of traffic that NAT instances can support depends on the instance size.
+            If you are bottlenecking, increase the instance size
+        . you can create high availability using Autoscaling Groups, multiple subnets in different AZs,
+            and a script to automate failover
+        . NAT instances are behind security groups
+
+    - NAT gateways
+        . Redundant inside the AZ
+        . Preferred by the enterprise
+        . starts at 5Gbps and scales currently to 45Gbps
+        . no need to patch
+        . not associated with security groups
+        . automatically assigned a public ip address
+        . remember to update route tables
+        . no need to disable Source/Destination checks
+        . if you have resources in multiple AZs and they share one NAT gateway, in the event that the NAT gateway's AZ is down,
+            resources in the other AZ lose internet access. 
+          To create AZ-independent architecture, create a NAT gateway in each AZ and configure your routing to ensure that resources
+            use the NAT gateway in the same AZ
+
