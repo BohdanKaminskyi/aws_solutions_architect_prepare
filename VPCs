@@ -159,3 +159,34 @@ Exam tips:
           To create AZ-independent architecture, create a NAT gateway in each AZ and configure your routing to ensure that resources
             use the NAT gateway in the same AZ
 
+
+Access Control Lists (ACLs)
+    - rule number for ipv4 is 100, and aws prefers to use 100+ incremental (next ipv4 -> 200)
+    - same for ipv6 (101) -> 201
+    - by default, new NACL has all inbound/outbound rules DENIED
+    - If you wanna do deny rule, make sure it's 'higher' than ALLOW rule (rules are applied in chronological order)
+    - network ACLS always do their work first, before security groups
+        1. Create ACL
+        2. 'Edit subnet associations' for public subnet
+        3. 'Edit inbound rules', add 100 -- port 80 -- 0.0.0.0/0 (http)
+                                 add 200 -- port 443 - 0.0.0.0/0 (https)
+                                 add 300 -- port 22 -- 0.0.0.0/0 (ssh)
+        4. 'Edit outbound rules' add 100 -- port 80 -- 0.0.0.0/0 (http)
+                                 add 200 -- port 443 - 0.0.0.0/0 (https),
+                                 add 300 -- ports 1024-65535 0.0.0.0/0 (ephemeral ports)
+                Ephemeral ports - short-lived transport protocol ports for IP communications.
+                Used for communication with clients on well-known ports
+    Exam tips: 
+        - VPC automatically comes with a default network ACL, and by default it allows
+            all inbound and outbound traffic
+        - You can create custom network ACLs. By default, each custom network ACL denies
+            all inbound and outbound traffic until you add rules
+        - Each subnet in your VPC must be associated with a network ACL. If you don't explicitly 
+            associate a subnet with a network ACL, the subnet is automatically associated with the default network ACL
+        - block ipaddresses using network ACLs not Security Groups
+        - you can associate network ACL with multiple subnets; however, a subnet can be associated with only one network ACL 
+            at a time. When you associate a network ACL with a subnet, the previous association is removed
+        - network ACLs contain a numbered list of rules that is evaluated in order,
+            starting with the lowest numbered rule
+        - network ACLs have separated inbound and outbound rules, each can allow/deny traffic
+        - network ACLs are stateless; responses to allowed inbound traffic are subject to the rules for outbound traffic (and vice versa)
