@@ -237,3 +237,33 @@ Direct Connect
     - useful for high throughput workloads (ie lots of network traffic)
     - or if you need a stable and reliable secure connection
     - can be scenario based question 'VPN connection keeps dropping out because of the amount of throughput'
+
+
+VPC Endpoins
+    - enables you to privately connect your VPC to supported AWS services and VPC endpoint services 
+        powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection
+    - instances in your VPC do not require public IPs to communicate with resources in the service. Traffic between your VPC and
+        the other service does not leave the Amazon network
+    - endpoints are virtual devices
+    - horizontally scaled, redundant and highly available VPC components that allow communication between instances in your VPC and
+        services without imposing availability risks or bandwidth constraints on your network traffic
+    - two types of VPC endpoints:
+        . Interface endpoints
+        . Gateway endpoints
+    - Interface endpoint is an elastic network interface with a private IP address that serves as an entry point for traffic destined 
+        to a supported service (a lot of services in list)
+    - Gateway Endpoints support:
+        . Amazon S3
+        . DynamoDB
+    - for endpoinsts we need endpoint to be in private subnet and role (s3 full access):
+        1. Attach that role to instance in private subnet
+        2. add vpc subnet to default subnet (edit associations)
+        3. ssh into private one (through public one)
+        4. echo "test" > test.txt (create some file)
+        5. aws s3 cp text.txt s3://<some_bucket>
+        6. remove root to NAT gateway (or remove NAT gateway)
+        7. after this you will not be able to do aws s3 ls
+        8. add endpoint for vpc, and main root table, policy - s3 full access
+        9. and then you will be able to look for s3 ls with:
+            `aws s3 ls --region us-east-2
+    
