@@ -218,3 +218,22 @@ VPC Flow Logs
             . DHCP traffic
             . traffic to the reserved IP address for the default VPC router
 
+
+Bastion Hosts
+    - special purpose computers on a network specifically designed and configured to withstand attacks.
+    - stands in public subnet
+    - all the staff is removed from it except rdp/ssh to communicate with private ec2 instance
+    - NAT Gateway is used to provide internet traffic to EC2 instances in a private subnet
+    - Bastion is used to securely administer EC2 instances (Using SSH or RDP). Bastions are sometimes called Jump Boxes
+    - you cannot use a NAT Gateway as a Bastion host
+
+
+Direct Connect
+    - AWS Direct Connect is a cloud service solution that makes it easy to establish a dedicated network connection from
+        your premises to AWS. Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter,
+        office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput,
+        and provide a more consistent network experience than Internet-based connections
+    - directly connects your data center to AWS
+    - useful for high throughput workloads (ie lots of network traffic)
+    - or if you need a stable and reliable secure connection
+    - can be scenario based question 'VPN connection keeps dropping out because of the amount of throughput'
