@@ -267,3 +267,71 @@ VPC Endpoins
         9. and then you will be able to look for s3 ls with:
             `aws s3 ls --region us-east-2
     
+
+Q: Having just created a new VPC and launching an instance into its Public Subnet, 
+    you realise that you have forgotten to assign a Public IP to the instance during creation. 
+    What is the simplest way to make your instance reachable from the outside world?
+A: Create an Elastic IP address and associate it with your instance
+
+Q: A subnet can span multiple Availability Zones
+A: False
+
+Q: Are you permitted to conduct your own vulnerability scans on your own VPC without alerting AWS first?
+A: Yes
+
+Q: Can customers do Penetration Testing in their own VPC ?
+A: True
+
+Q: You can accelerate your application by adding a second Internet Gateway to your VPC
+A: You may have only one Internet Gateway per VPC.
+
+Q: When peering VPCs, you may peer your VPC only with another VPC in your same AWS account.
+A: You may peer a VPC to another VPC that's in your same account, or to any VPC in any other account
+
+Q: Application Load Balancer must be deployed into at least two subnets
+A: True
+
+Q: Which of the following is a chief advantage of using VPC endpoints to connect your VPC to services such as S3?
+A: In contrast to a NAT gateway, traffic between your VPC and the other service does not leave the Amazon network when using VPC endpoints
+
+Q: Which of the following allows you to SSH or RDP into an EC2 instance located in a private subnet?
+A: A Bastion host allows you to securely administer (via SSH or RDP) an EC2 instance located in a private subnet. 
+    Don't confuse Bastions and NATs, which allow outside traffic to reach an instance in a private subnet
+
+Q: How many internet gateways can I attach to my custom VPC
+A: one
+
+Q: You have five VPCs in a 'hub and spoke' configuration, with VPC 'A' in the center and individually paired with VPCs 'B', 'C', 'D', and 'E',
+     which make up the 'spokes'. There are no other VPC connections. Which of the following VPCs can VPC 'B' communicate with directly?
+A: As transitive peering is not allowed, VPC 'B' can communicate directly only with VPC 'A'.
+
+Q: Which of the following is true?
+A: Security Groups are stateful and Network Access Control Lists are stateless
+
+Q: Which of the following offers the largest range of internal IP addresses?
+A: Min number
+
+Q: Security groups act like a firewall at the instance level, whereas _________ are an additional layer of security that act at the subnet level
+A: Network ACLs
+
+Q: In a default VPC, all Amazon EC2 instances are assigned 2 IP addresses at launch. What are they?
+A: A Public IP address and Private IP address
+
+Q: When I create a new security group, all outbound traffic is allowed by default
+A: True
+
+Q: By default, how many VPCs am I allowed in each AWS Region?
+A: 5
+
+Q: Select the incorrect statement.
+A: In Amazon VPC, an instance does not retain its private IP (It actually retains)
+
+Q: To save administration headaches, a consultant advises that you leave all security groups
+    in web facing subnets open on port 22 to 0.0.0.0/0 CIDR.
+    That way, you can connect wherever you are in the world. Is this a good security design?
+A: 0.0.0.0/0 would allow ANYONE from ANYWHERE to connect to your instances. 
+    This is generally a bad plan. The phrase 'Web facing subnets..' does not mean just web servers. 
+    It would include any instances in that subnet some of which you may not strangers attacking. 
+    You would only allow 0.0.0.0/0 on port 80 or 443 to to connect to your public facing Web Servers, 
+    or preferably only to an ELB. Good security starts by limiting public access to only what the customer needs. 
+    Please see the AWS Security white paper for complete details.
