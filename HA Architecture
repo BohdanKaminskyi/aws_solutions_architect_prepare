@@ -1,0 +1,24 @@
+Elastic Load Balancers
+    - physical/virtual device which is used to balance a load between multiple webservers
+    - types:
+        . Application Load Balancer
+        . Network Load Balancer
+        . Classic Load Balancer
+    
+    1. Application Load Balancers
+        - best suited for load balancing of HTTP and HTTPS traffic
+        - they operate at Level 7 and are application-aware
+        - they are intelligent, and you can create advanced request routing,
+            sending specified requests to specific web servers
+        - example: user changes language to french -> we can use french server for that
+    2. Network Load Balancers
+        - best suited for load balancing TCP traffic where extreme performance is required
+        - operating at the connection level (Layer 4)
+        - capable of handling millions of requests per second, while maintaining ultra-low latencies
+    3. Classic Load Balancers
+        - legacy Elastic Load Balancers
+        - you can load balance HTTP/HTTPS applications and use Layer 7-specific features, such as X-Forwarded and sticky sessions
+        - you don't really need it, use it if you don't care, it's simply a round-robin stuff, a bit cheaper that ALB
+        - if your app stops responding, the CLB responds with a 504 error (gateway timeout)
+    - X-Forwarded-For header is used to get user public IP address when traffic is routed through load Balancer
+    
