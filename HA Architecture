@@ -21,4 +21,13 @@ Elastic Load Balancers
         - you don't really need it, use it if you don't care, it's simply a round-robin stuff, a bit cheaper that ALB
         - if your app stops responding, the CLB responds with a 504 error (gateway timeout)
     - X-Forwarded-For header is used to get user public IP address when traffic is routed through load Balancer
+
+
+ELB and Health Checks Lab
+    - when ELB works on some instances, and 1 instance is unhealthy, it will be removed from load balancing
+    - instances monitored by ELB are reported as:
+        . inService
+        . OutOfService
+    - health checks check the instance health by talking to it
+    - load balancers have their own DNS names. You are never given an IP address
     
