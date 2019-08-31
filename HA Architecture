@@ -30,4 +30,27 @@ ELB and Health Checks Lab
         . OutOfService
     - health checks check the instance health by talking to it
     - load balancers have their own DNS names. You are never given an IP address
-    
+
+
+Advanced Load Balancer Theory
+    - Sticky Sessions
+        . ClassicLB routes each request independently to the registered EC2 instance with the smallest load
+        . Sticky sessions allow you to bind a user's session to a specific EC2 instance. 
+            This ensures that all requests from the user during the session are sent to the same instance
+            You can enable Sticky Sessions for AppLB as well, but the traffic will be sent to at the Target Group Level
+        - basic exam scenario: you have your user, he wants to visit website (which is behind ClassicLB), and all of the traffic
+            is sent to one EC2 instance, no traffic to 2nd EC2 instance, how to solve that?
+            --- DISABLE Sticky Sessions
+    - Cross Zone Load Balancing
+        . without it - you have Route53(Weighted routing 50%/50% to 2 AZ, in one group 4 instances, in second 1)
+            You also have ClassicLBs in each group. 50% of traffic goes to AZ-1, and there are 4 instances -> each will handle 12.5% of traffic.
+            Instance in AZ-2 will thne handle 50% of traffic (1 instance under LB)
+        . with it - LB in AZ-2 can send requests to instances in AZ-1... so we have 4+1 EC2 instances -> 20% traffic on each
+    - Path Patterns
+        . you can create a listener with rules to forward requests based on the URL path.
+            This is known as path-based routing. If you are running microservices, you can route traffic to multiple
+            back-end services using path-based routing. For example, you can route general requests to one target group and 
+            requests to render images to another target group
+
+
+
